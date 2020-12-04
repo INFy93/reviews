@@ -22,13 +22,6 @@
         <div class="review-text">
             {{ $review->text }}
         </div>
-    <div class="actions">
-    @if($review->is_moderate == 0)
-    <em><span class="badge badge-primary"> <a href="{{route('change-review', $review->id)}}">Изменить Ваш отзыв</a> </span></em>
-    @else
-    <em><span class="badge badge-warning"> Отзыв уже прошел модерацию, редактирование невозможно. </span></em>
-    @endif
-    </div>
 </div>
 @empty
 <div class="col-md-12">

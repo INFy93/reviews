@@ -51,38 +51,4 @@ class ReviewController extends Controller
         return view('my_reviews', ['user_reviews' => $user_reviews]);
     }
 
-    public function changeReview($id) //пользователь редактирует свой отзыв
-    {
-        $user_review = Review::find($id);
-        /* проверяем, что id пользователя соответствует залогиненному пользователю.
-           защита от умников, которые вручную в адресной строке будут писать id другого отзыва и править левые отзывы.
-           экшн-протекшн-сатисфэкшн.
-        */
-
-        if ($user_review && $user_review->user_id == Auth::id()) {
-            return view('change-review', ['user_review' => $user_review]); //все ок? велком
-        } else {
-            toastr()->error('Ошибочное действие.'); //сообщаем, что...
-            return redirect()->route('user-reviews'); //...отзыв не твой, иди нахуй
-        }
-    }
-
-    public function updateReview($id, Request $request) //обновление отзыва в бд
-    {
-        $user_review = Review::find($id);
-        if ($user_review && $user_review->user_id == Auth::id()) {
-            $user_review->title = $request->input('title');
-            $user_review->text = $request->input('text');
-            $user_review->ip = $request->ip();
-            $user_review->last_action = 5;
-
-            $user_review->save();
-
-            toastr()->success('Ваш отзыв успешно отредактирован');
-            return redirect()->route('user-reviews');
-        } else {
-            toastr()->error('Ошибочное действие.');
-            return redirect()->route('user-reviews');
-        }
-    }
 }
