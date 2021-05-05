@@ -31,6 +31,7 @@
     <a class="p-2 text-dark" href="{{route('artisan')}}">Artisan</a>
     <a class="p-2 text-dark" href="{{route('get-logs')}}">Логи</a>
     @else
+      <a class="p-2 text-dark" href="/">Все отзывы</a>
       <a class="p-2 text-dark" href="#" data-toggle="modal" data-target="#addReview">Добавить отзыв</a>
       <a class="p-2 text-dark" href="{{route('user-reviews')}}">Мои отзывы</a>
     @endif
