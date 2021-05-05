@@ -70,9 +70,8 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-       // dd($request->input('name'));
-      //  dd($request->input('password'));
-      if(checkGigabyteUser($request->input('name'), $request->input('password')))
+
+      if(\Features::checkGigabyteUser($request->input('name'), $request->input('password')))
        {
             $this->validator($request->all())->validate();
 
