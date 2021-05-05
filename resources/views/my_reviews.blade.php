@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="col-md-12">
-    <h4 class="main-title">Мои отзывы ({{getUserReviewCount(Auth::id())}})</h4>
+    <h4 class="main-title">Мои отзывы ({{Features::getUserReviewCount(Auth::id())}})</h4>
 </div>
 
 @forelse ($user_reviews as $review)
@@ -17,7 +17,7 @@
 
     <div class="user-info">
         <i class="fa fa-user"></i> <strong>{{ $review->name }} </strong> <br>
-        <i class="far fa-clock"></i>  {{ pureDate($review->created_at) }}
+        <i class="far fa-clock"></i>  {{ Features::pureDate($review->created_at) }}
         </div>
         <div class="review-text">
             {{ $review->text }}
