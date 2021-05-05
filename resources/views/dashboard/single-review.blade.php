@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')Редактировать отзыв@endsection
+@section('title')Редактировать отзыв @endsection
 
 @section('content')
 <div class="col-md-12 shadow p-3 mb-5 bg-white rounded review-block">

@@ -36,30 +36,38 @@ Route::middleware('auth')->group(function () { //группа роутов дл�
 
 
 
-Route::group(['middleware' => 'admin'], function() { //админские функции
-    Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard'); //общая админка
+Route::group(['middleware' => 'admin', 'prefix' => 'dashboard'], function() { //админские функции
+    Route::get('/', 'DashboardController@dashboard')->name('dashboard'); //общая админка
 
-    Route::get('/dashboard/info', 'DashboardController@getInfo')->name('stats'); //обзорная инфа по отзывам
+    Route::get('/info', 'DashboardController@getInfo')->name('stats'); //обзорная инфа по отзывам
 
-    Route::post('/dashboard/update-review/{id}', 'DashboardController@editReview')->name('update-review'); //POST-обновление отзыва
+    Route::post('/update-review/{id}', 'DashboardController@editReview')->name('update-review'); //POST-обновление отзыва
 
-    Route::get('/dashboard/edit-review/{id}', 'DashboardController@getReviewToEdit')->name('edit-review'); //страничка для редактирования отзыва
+    Route::get('/edit-review/{id}', 'DashboardController@getReviewToEdit')->name('edit-review'); //страничка для редактирования отзыва
 
-    Route::get('/dashboard/user-reviews/{user_id}', 'DashboardController@findUserReviews')->name('users-reviews'); //выбираем отзывы юзера для администрирования
+    Route::get('/user-reviews/{user_id}', 'DashboardController@findUserReviews')->name('users-reviews'); //выбираем отзывы юзера для администрирования
 
-    Route::get('/dashboard/delete-review/{review_id}', 'DashboardController@deleteReview')->name('delete-review'); //удаление отзыва
+    Route::get('/delete-review/{review_id}', 'DashboardController@deleteReview')->name('delete-review'); //удаление отзыва
 
-    Route::get('/dashboard/moderate/{id}', 'DashboardController@moderateReview')->name('moderate'); //изменение статуса модерации отзыва
+    Route::get('/moderate/{id}', 'DashboardController@moderateReview')->name('moderate'); //изменение статуса модерации отзыва
 
-    Route::get('/dashboard/actions', 'ActionsController@getAllActions')->name('view-actions'); //просмотр возможных действий
+    Route::get('/actions', 'ActionsController@getAllActions')->name('view-actions'); //просмотр возможных действий
 
-    Route::post('dashboard/actions/add-action', 'ActionsController@addAction')->name('add-action'); //добавление действия
+    Route::post('/actions/add-action', 'ActionsController@addAction')->name('add-action'); //добавление действия
 
-    Route::get('dashboard/logs', 'LogsController@getLogs')->name('get-logs'); //просмотр логов
+    Route::get('/logs', 'LogsController@getLogs')->name('get-logs'); //просмотр логов
 
-    Route::get('dashboard/logs/clear', 'LogsController@clearLogs')->name('clear-logs'); //очистка всех логов
+    Route::get('/logs/clear', 'LogsController@clearLogs')->name('clear-logs'); //очистка всех логов
 
-    Route::get('dashboard/logs/delete-log/{id}', 'LogsController@deleteOneLog')->name('delete-log'); //удаляем одну строчку лога. AJAX
+    Route::get('/user-logs/clear', 'LogsController@clearUserLogs')->name('clear-user-logs'); //очистка всех пользовательских логов
 
-    Route::get('dashboard/review/{id}', 'DashboardController@getSingleReview')->name('single-review'); //получаем отдельный отзыв для просмотра
+    Route::get('/logs/delete-log/{id}', 'LogsController@deleteOneLog')->name('delete-log'); //удаляем одну строчку лога. AJAX
+
+    Route::get('/logs/delete-user-log/{id}', 'LogsController@deleteUserLog')->name('delete-user-log'); //удаляем одну строчку пользовательского лога. AJAX
+
+    Route::get('/review/{id}', 'DashboardController@getSingleReview')->name('single-review'); //получаем отдельный отзыв для просмотра
+
+    Route::get('/artisan', 'DashboardController@artisanShow')->name('artisan'); //страница для управления командами artisan
+
+    Route::get('/artisan/{action}', 'DashboardController@artisanCalls')->name('artisan-calls'); //действия для artisan
 });

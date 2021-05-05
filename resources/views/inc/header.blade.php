@@ -28,6 +28,7 @@
     <a class="p-2 text-dark" href="{{route('dashboard')}}"><strong>Управление отзывами</strong></a>
     <a class="p-2 text-dark" href="{{route('stats')}}">Статистика</a>
     <a class="p-2 text-dark" href="{{route('view-actions')}}">Настройка действий</a>
+    <a class="p-2 text-dark" href="{{route('artisan')}}">Artisan</a>
     <a class="p-2 text-dark" href="{{route('get-logs')}}">Логи</a>
     @else
       <a class="p-2 text-dark" href="#" data-toggle="modal" data-target="#addReview">Добавить отзыв</a>

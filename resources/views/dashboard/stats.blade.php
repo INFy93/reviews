@@ -39,7 +39,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered stats" id="" width="100%" cellspacing="0">
+                                    <table class="table table-bordered stats" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>ID юзера</th>
@@ -57,10 +57,10 @@
                                             <tr>
                                                 <td>{{ $users->id }}</td>
                                                 <td>{{ $users->name }}</td>
-                                                <td><a href="{{route('users-reviews', $users->id)}}">{{ getUserReviewCount($users->id) }}</a></td>
-                                                <td>{{ getAvgMark($users->id) }}</td>
-                                                <td>{{ pureDate($users->created_at) }}</td>
-                                                <td>{{ getUserIp($users->id) }}</td>
+                                                <td><a href="{{route('users-reviews', $users->id)}}">{{ Features::getUserReviewCount($users->id) }}</a></td>
+                                                <td>{{ Features::getAvgMark($users->id) }}</td>
+                                                <td>{{ Features::pureDate($users->created_at) }}</td>
+                                                <td>{{ Features::getUserIp($users->id) }}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>

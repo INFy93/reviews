@@ -22,7 +22,6 @@
                 {{ $review->text }}
             </div>
     </div>
-    <hr />
 @empty
 <div class="col-md-12">
     <div class="alert alert-danger message">

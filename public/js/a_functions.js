@@ -4,25 +4,18 @@ $(document).ready(function() {
         'X-CSRF-Token': $('meta[name="_token"]').attr('content')
         }
     });
-// Оформляем DataTable
-    $('#dataTable').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
-        }
-    });
-
     // Оформляем сводную таблицу
     $('table.stats').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
         },
 
-        "order": [[ 4, "desc" ]]
+        "order": [[ 0, "desc" ]]
 
     });
 
     // Оформляем таблицу с логами
-    $('table.logs').DataTable({
+    $('table.datatable').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
         },
@@ -81,22 +74,31 @@ function deleteLog(id) {
     var dataTable;
     let row_id = $(id).closest('tr').attr('id');
     let route = '/dashboard/logs/delete-log/'+row_id;
-    dataTable = $('table.logs').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
-        },
-
-        "order": [[ 4, "desc" ]]
-
-    });
     if (confirm("Удалить данную запись из лога?"))
     {
         $.ajax({
             type: 'get',
             url: route
         }).done(function (html){
-            $('#'+row_id).remove();
-           // $(".logs").reload();
+            $('.table.logs').DataTable().row().remove().draw();
+            toastr.warning('Лог успешно удален')
+        }).fail(function (html) {
+            toastr.error('Ошибка удаления лога')
+        })
+    }
+}
+
+function deleteUserLog(id) {
+    var dataTable;
+    let row_id = $(id).closest('tr').attr('id');
+    let route = '/dashboard/logs/delete-user-log/'+row_id;
+    if (confirm("Удалить данную запись из лога?"))
+    {
+        $.ajax({
+            type: 'get',
+            url: route
+        }).done(function (html){
+            $('.table.user_logs').DataTable().row().remove().draw();
             toastr.warning('Лог успешно удален')
         }).fail(function (html) {
             toastr.error('Ошибка удаления лога')
@@ -105,8 +107,28 @@ function deleteLog(id) {
 }
 
 function confirmDelete(){
-    var ask=confirm("Вы действительно хотите очистить все логи?");
-    if(ask){
+    let ask = confirm("Вы действительно хотите очистить все логи?");
+    if (ask) {
       window.location="/dashboard/logs/clear";
      }
+}
+
+function confirmUserDelete(){
+    let ask = confirm("Вы действительно хотите очистить все пользовательские логи?");
+    if (ask) {
+      window.location="/dashboard/user-logs/clear";
+     }
+}
+function clearCache(i) {
+    let action = $(i).attr('id');
+    let route = '/dashboard/artisan/' + action;
+
+    $.ajax({
+        type: 'GET',
+        url: route,
+        success: function (result) {
+            answer = result;
+            toastr.success('Успех: ' + answer);
+        }
+    });
 }

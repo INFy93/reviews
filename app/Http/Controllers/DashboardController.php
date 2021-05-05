@@ -27,7 +27,9 @@ class DashboardController extends Controller
 
     public function findUserReviews($user_id)
     {
-        $users_reviews = Review::where('user_id', '=', $user_id)->paginate(5);
+        $users_reviews = Review::where('user_id', '=', $user_id)
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
 
         $user_info = User::find($user_id);
 
@@ -101,7 +103,7 @@ class DashboardController extends Controller
         $avg_mark = round(Review::avg('mark'), 2); //выводим среднюю оценку
 
         $user_info = User::where('users.is_admin', '<>', '1')
-            ->select('users.id', 'users.name', 'users.created_at',)
+            ->select('users.id', 'users.name', 'users.created_at')
             ->orderBy('users.created_at', 'desc')
             ->get();
 
@@ -119,5 +121,39 @@ class DashboardController extends Controller
             toastr()->error('Отзыв был удален, его просмотр невозможен (спасибо, кэп)');
             return redirect()->route('get-logs');
         }
+    }
+
+    public function artisanShow()
+    {
+        return view('dashboard.artisan');
+    }
+
+    public function artisanCalls($action)
+    {
+        switch ($action) {
+            case 'cache':
+                Artisan::call('cache:clear'); //общий кеш
+                break;
+
+            case 'config':
+                Artisan::call('config:clear'); //кеш конфигов
+                break;
+
+            case 'route':
+                Artisan::call('route:clear'); //кеш роутов
+                break;
+
+            case 'view':
+                Artisan::call('view:clear'); //кеш вьюшек
+                break;
+                case 'migrate':
+                    Artisan::call('migrate'); //миграции
+                    break;
+
+            default:
+                Artisan::call('cache:clear'); //по дефолту чистим общий кеш
+        }
+
+        return Artisan::output();
     }
 }
