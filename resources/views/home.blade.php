@@ -16,7 +16,7 @@
             @endif
             <div class="user-info">
             <i class="fa fa-user"></i> <strong>{{ $review->name }} </strong> <br>
-            <i class="far fa-clock"></i>  {{ pureDate($review->created_at) }}
+            <i class="far fa-clock"></i>  {{ Features::pureDate($review->created_at) }}
             </div>
             <div class="review-text">
                 {{ $review->text }}
