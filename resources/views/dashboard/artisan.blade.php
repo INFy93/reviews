@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td>storage:link</td>
-                    <td><a class="btn btn-primary" href="#" id="migrate" role="button"
+                    <td><a class="btn btn-primary" href="#" id="link" role="button"
                         onClick="clearCache(this);">Симлинк</a></td>
                 </tr>
             </tbody>

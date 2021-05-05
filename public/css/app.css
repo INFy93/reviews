@@ -262,7 +262,7 @@
 }
 
 body {
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 
 .main-title,

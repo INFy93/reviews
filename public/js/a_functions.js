@@ -119,6 +119,7 @@ function confirmUserDelete(){
       window.location="/dashboard/user-logs/clear";
      }
 }
+
 function clearCache(i) {
     let action = $(i).attr('id');
     let route = '/dashboard/artisan/' + action;
@@ -126,9 +127,11 @@ function clearCache(i) {
     $.ajax({
         type: 'GET',
         url: route,
-        success: function (result) {
+    }).done(function (result) {
             answer = result;
             toastr.success('Успех: ' + answer);
-        }
+    }).fail(function(result) {
+        answer = result;
+        toastr.error('Ошибка: ' + answer);
     });
 }

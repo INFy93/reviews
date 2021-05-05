@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Artisan;
 use App\User;
 use App\Models\Review;
 use App\Models\Event_type;
@@ -146,9 +147,12 @@ class DashboardController extends Controller
             case 'view':
                 Artisan::call('view:clear'); //кеш вьюшек
                 break;
-                case 'migrate':
-                    Artisan::call('migrate'); //миграции
-                    break;
+            case 'migrate':
+                Artisan::call('migrate'); //миграции
+                break;
+            case 'link':
+                Artisan::call('storage:link'); //симлинк
+                break;
 
             default:
                 Artisan::call('cache:clear'); //по дефолту чистим общий кеш

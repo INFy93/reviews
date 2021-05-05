@@ -33,7 +33,7 @@
                             <td>{{ $log->event_name }}</td>
                             <td><a href="{{ route('single-review', $log->review_id) }}">{{ $log->review_id }}</a> | <a
                                     href="#" onclick="deleteLog(this)">Удалить эту запись лога</a> </td>
-                            <td>{{ pureDate($log->updated_at) }}</td>
+                            <td>{{ Features::pureDate($log->updated_at) }}</td>
                         </tr>
                         @empty
                         <tr>
@@ -70,7 +70,7 @@
                                 <td>{{ $log->event_name }}</td>
                                 <td><a href="{{ route('single-review', $log->review_id) }}">{{ $log->review_id }}</a> | <a
                                         href="#" onclick="deleteUserLog(this)">Удалить эту запись лога</a> </td>
-                                <td>{{ pureDate($log->updated_at) }}</td>
+                                <td>{{ Features::pureDate($log->updated_at) }}</td>
                             </tr>
                             @empty
                             <tr>

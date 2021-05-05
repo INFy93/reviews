@@ -88,8 +88,13 @@ class Features
         $query = Review::where('user_id', '=', $user_id)
             ->latest()
             ->first();
-        $ip = '0.0.0.0';
-        return $ip;
+        //dd($query);
+        if ($query != null)
+        {
+            $ip = $query['ip'];
+            return $ip;
+        }
+        else return '0.0.0.0';
     }
 
     public static function checkGigabyteUser($login, $password)
