@@ -7,14 +7,12 @@
         <a href="/"><img class="logo" src="{{asset('storage/images/logo.png')}}" alt="logo"></a>
         @endif
       </div>
-      <div class="col-4 text-center">
-        <h4 class="blog-header-logo text-dark gigabyte-title">ООО ЦРИТ Гигабайт</h4>
-      </div>
+
       <div class="col-4 d-flex justify-content-end align-items-center">
         @if(Auth::check())
         <a class="btn btn-sm btn-outline-secondary" href="{{route('logout')}}">Выйти</a>
         @else
-        <a class="btn btn-sm btn-outline-secondary" href="{{route('login')}}">Войти</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{{route('enter')}}">Войти</a>
         @endif
       </div>
     </div>

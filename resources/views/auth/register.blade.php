@@ -9,10 +9,10 @@
                 Для входа в систему введите Ваши <strong>логин и пароль</strong> от доступа в Интернет (их вы можете узнать из Вашей карточки клиента либо обратившись в наш колл-центр: +7 978 048 48 68)
               </div>
             <div class="card">
-                <div class="card-header">{{ __('Первый вход') }}</div>
+                <div class="card-header">{{ __('Аутентификация') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">

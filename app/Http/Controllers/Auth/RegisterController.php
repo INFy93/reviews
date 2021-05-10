@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-
+use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -44,6 +44,10 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function registrationForm()
+    {
+        return view('auth.register');
+    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -62,7 +66,7 @@ class RegisterController extends Controller
         ], $messages);
     }
 
-     /**
+    /**
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,23 +74,27 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-
-      if(\Features::checkGigabyteUser($request->input('name'), $request->input('password')))
-       {
+        $user = $request->except(['_token']);
+        if (User::where('name', '=', $request->input('name'))->exists()) {
+            if (Auth::attempt($user)) {
+                return redirect()->route('home');
+            } else {
+                toastr()->error('Неверный логин или пароль!');
+                return redirect()->route('enter');
+            }
+        } else if (\Features::checkGigabyteUser($request->input('name'), $request->input('password'))) {
             $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+            event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+            $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
-       } else
-       {
-         toastr()->error('Неправильный логин или пароль');
-         return redirect()->route('register');
-       }
-
+            return $this->registered($request, $user)
+                ?: redirect($this->redirectPath());
+        } else {
+            toastr()->error('Неправильный логин или пароль!');
+            return redirect()->route('enter');
+        }
     }
 
 
@@ -100,9 +108,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-            return User::create([
-                'name' => $data['name'],
-                'password' => Hash::make($data['password']),
-            ]);
+        return User::create([
+            'name' => $data['name'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 }
