@@ -48,7 +48,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Войти') }}
                                 </button>
-                                <a class="btn btn-link" href="{{ route('login') }}">Форма входа </a>
                             </div>
                         </div>
                     </form>
