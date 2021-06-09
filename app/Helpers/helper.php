@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use App\Models\Review;
+use App\User;
+use DateTime;
 use Illuminate\Support\Facades\Http;
 class Features
 {
@@ -64,6 +66,36 @@ class Features
 
         return date('j', strtotime($date)) . $month . $year . ' в ' . $review_time; //выводим
 
+    }
+
+    private static function number($n, $titles) {
+        $cases = array(2, 0, 1, 1, 1, 2);
+        return $titles[($n % 100 > 4 && $n % 100 < 20) ? 2 : $cases[min($n % 10, 5)]];
+    }
+
+    public static function interval($user_id) //считаем стаж юзера
+    {
+        $now = now();
+        $user_data = User::where('id', $user_id)->first();
+        $reg_user_date = $user_data['reg_date'];
+        $date_now = new DateTime($now);
+        $date_user = new DateTime($reg_user_date);
+
+        $interval = $date_now->diff($date_user);
+        $result = '';
+        if ($interval->y) { $result .= $interval->format("%y ". self::number($interval->y, array('год', 'года', 'лет'))); };
+        if ($interval->m) { $result .= $interval->format(", %m ". self::number($interval->m, array('месяц', 'месяца', 'месяцев'))); }
+        if ($interval->d)
+        {
+            if ($interval->m >= 1)
+            {
+                $result .= $interval->format(" и %d ". self::number($interval->d, array('день', 'дня', 'дней')));
+            } else
+            {
+                $result .= " меньше месяца";
+            }
+        }
+        return $result;
     }
 
     public static function getUserReviewCount($id) //получаем кол-во отзывов конкретного юзера для сводной таблицы

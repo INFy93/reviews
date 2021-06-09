@@ -15,7 +15,7 @@
             <a class="badge badge-danger" id={{$review->id}} href="#" onclick="deleteReview(this)">Удалить</a>
             @endif
             <div class="user-info">
-            <i class="fa fa-user"></i> <strong>{{ $review->name }} </strong> <br>
+            <i class="fa fa-user"></i> <strong>{{ $review->name }} </strong> (Стаж абонента: {{ \Features::interval($review->user_id)}}) <br>
             <i class="far fa-clock"></i>  {{ Features::pureDate($review->created_at) }}
             </div>
             <div class="review-text">
