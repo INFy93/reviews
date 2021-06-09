@@ -103,8 +103,11 @@ class Features
             'user' => $login,
             'password' => $password,
         ]);
-        if ($checkUser == '1') {
-            return true;
+        if ($checkUser != '0') {
+            return $checkUser;
+        } else
+        {
+            return false;
         }
     }
 }

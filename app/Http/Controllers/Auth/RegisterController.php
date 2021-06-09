@@ -75,6 +75,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $user = $request->except(['_token']);
+        $reg_date = \Features::checkGigabyteUser($request->input('name'), $request->input('password'));
+        $request->request->add(['reg_date' => $reg_date]);
         if (User::where('name', '=', $request->input('name'))->exists()) {
             if (Auth::attempt($user)) {
                 return redirect()->route('home');
@@ -82,7 +84,7 @@ class RegisterController extends Controller
                 toastr()->error('Неверный логин или пароль!');
                 return redirect()->route('enter');
             }
-        } else if (\Features::checkGigabyteUser($request->input('name'), $request->input('password'))) {
+        } else if ($reg_date) {
             $this->validator($request->all())->validate();
 
             event(new Registered($user = $this->create($request->all())));
@@ -111,6 +113,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'password' => Hash::make($data['password']),
+            'reg_date' => $data['reg_date']
         ]);
     }
 }
