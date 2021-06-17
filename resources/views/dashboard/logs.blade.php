@@ -7,7 +7,7 @@
             <a class="nav-link active" data-toggle="tab" href="#admin_logs">Действия администраторов</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#user_logs">Пользовательские логи (тест)</a>
+            <a class="nav-link" data-toggle="tab" href="#user_logs">Пользовательские логи</a>
         </li>
     </ul>
     <div class="tab-content">
