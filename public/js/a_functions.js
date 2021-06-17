@@ -10,7 +10,7 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
         },
 
-        "order": [[ 0, "desc" ]]
+        "order": [[ 0, "asc" ]]
 
     });
 
@@ -20,7 +20,7 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Russian.json"
         },
 
-        "order": [[ 4, "desc" ]]
+        "order": [[ 4, "asc" ]]
 
     });
 
@@ -69,10 +69,12 @@ function deleteReview(id) {
     }
 
 }
-
-function deleteLog(id) {
+$(document.body).on('click', '.delete_admin_log', deleteLog);
+function deleteLog() {
     var dataTable;
-    let row_id = $(id).closest('tr').attr('id');
+    var that = this;
+    let row_id = $(this).closest('tr').attr('id');
+    var index = $(this).closest("tr");
     let route = '/dashboard/logs/delete-log/'+row_id;
     if (confirm("Удалить данную запись из лога?"))
     {
@@ -80,17 +82,18 @@ function deleteLog(id) {
             type: 'get',
             url: route
         }).done(function (html){
-            $('.table.logs').DataTable().row().remove().draw();
+            index.hide();
             toastr.warning('Лог успешно удален')
         }).fail(function (html) {
             toastr.error('Ошибка удаления лога')
         })
     }
 }
-
+$(document.body).on('click', '.delete_user_log', deleteUserLog);
 function deleteUserLog(id) {
     var dataTable;
     let row_id = $(id).closest('tr').attr('id');
+    var index = $(this).closest("tr");
     let route = '/dashboard/logs/delete-user-log/'+row_id;
     if (confirm("Удалить данную запись из лога?"))
     {
@@ -98,7 +101,7 @@ function deleteUserLog(id) {
             type: 'get',
             url: route
         }).done(function (html){
-            $('.table.user_logs').DataTable().row().remove().draw();
+            index.hide();
             toastr.warning('Лог успешно удален')
         }).fail(function (html) {
             toastr.error('Ошибка удаления лога')

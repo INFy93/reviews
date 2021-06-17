@@ -32,12 +32,16 @@
                             <td>{{ $log->name }}</td>
                             <td>{{ $log->event_name }}</td>
                             <td><a href="{{ route('single-review', $log->review_id) }}">{{ $log->review_id }}</a> | <a
-                                    href="#" onclick="deleteLog(this)">Удалить эту запись лога</a> </td>
+                                    href="#"  class="delete_admin_log">Удалить эту запись лога</a> </td>
                             <td>{{ Features::pureDate($log->updated_at) }}</td>
                         </tr>
                         @empty
                         <tr>
                             <td colspan="5">В логах ничего нет.</td>
+                            <td style="display: none;"></td>
+                            <td style="display: none;"></td>
+                            <td style="display: none;"></td>
+                            <td style="display: none;"></td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -69,12 +73,16 @@
                                 <td>{{ $log->name }}</td>
                                 <td>{{ $log->event_name }}</td>
                                 <td><a href="{{ route('single-review', $log->review_id) }}">{{ $log->review_id }}</a> | <a
-                                        href="#" onclick="deleteUserLog(this)">Удалить эту запись лога</a> </td>
+                                        href="#" class="delete_user_log">Удалить эту запись лога</a> </td>
                                 <td>{{ Features::pureDate($log->updated_at) }}</td>
                             </tr>
                             @empty
                             <tr>
                                 <td colspan="5">В логах ничего нет.</td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
                             </tr>
                             @endforelse
                         </tbody>
