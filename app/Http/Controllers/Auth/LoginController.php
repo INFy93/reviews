@@ -96,9 +96,7 @@ class LoginController extends Controller
             event(new Registered($user = $this->create($request->all())));
 
             $this->guard()->login($user);
-
-            return $this->registered($request, $user)
-                ?: redirect($this->redirectPath());
+            return redirect()->route('home');
         } else {
             $this->incrementLoginAttempts($request);
             toastr()->error('Неправильный логин или пароль!');
