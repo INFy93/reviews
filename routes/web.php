@@ -19,8 +19,8 @@ Route::get('/', 'ReviewController@getReviews')->name('home'); //главная �
 Route::get('/test', 'VueController@index')->name('test'); //vue js testing
 Route::get('/test/ajax', 'VueController@getJson')->name('ajax'); //ajax-запрос vue
 //роуты для нового логина/регистрации
-Route::get('/enter', 'Auth\RegisterController@registrationForm')->name('enter');
-Route::post('/enter', 'Auth\RegisterController@register')->name('login');
+Route::get('/enter', 'Auth\LoginController@showLoginForm')->name('enter');
+Route::post('/enter', 'Auth\LoginController@login')->middleware("throttle:5,2")->name('login');
 
 Route::middleware('auth')->group(function () { //группа роутов для авторизованного юзера-неАдмина
     Route::post('/add-review', 'ReviewController@addReview')->name('add-review'); //добавляем отзыв

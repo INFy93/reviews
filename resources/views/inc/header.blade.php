@@ -12,7 +12,7 @@
         @if(Auth::check())
         <a class="btn btn-sm btn-outline-secondary" href="{{route('logout')}}">Выйти</a>
         @else
-        <a class="btn btn-sm btn-outline-secondary" href="{{route('enter')}}">Войти</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{{ route('enter') }}">Войти</a>
         @endif
       </div>
     </div>

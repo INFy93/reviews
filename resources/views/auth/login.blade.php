@@ -7,14 +7,13 @@
         <div class="col-md-8">
             <br>
             <div class="alert alert-info" role="alert">
-                Для первого входа в систему нажмите на ссылку <strong>"Как войти?"</strong> под формой входа. <br>
-                Если Вы заходите к нам не в первый раз - введите логин и пароль в форме ниже.
+                Для входа в систему введите Ваши <strong>логин и пароль</strong> от доступа в Интернет (их вы можете узнать из Вашей карточки клиента либо обратившись в наш колл-центр: +7 978 048 48 68)
               </div>
             <div class="card">
                 <div class="card-header">{{ __('Аутентификация') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" id="login-form" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -59,11 +58,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary login">
                                     {{ __('Войти') }}
                                 </button>
-
-                                <a class="btn btn-link" href="{{ route('register') }}">Как войти? </a>
                             </div>
                         </div>
                     </form>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,13 +27,15 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
+    use ThrottlesLogins;
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected $maxAttempts = 3; // Default is 5
+    protected $decayMinutes = 2; // Default is 1
 
     /**
      * Create a new controller instance.
@@ -81,7 +84,7 @@ class RegisterController extends Controller
             if (Auth::attempt($user)) {
                 return redirect()->route('home');
             } else {
-                toastr()->error('Неверный логин или пароль!');
+                toastr()->error('Неправильный логин или пароль!');
                 return redirect()->route('enter');
             }
         } else if ($reg_date) {

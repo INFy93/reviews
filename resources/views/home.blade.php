@@ -59,15 +59,10 @@
                 <small class="form-text text-muted">От 10 до 1000 символов.</small>
             </div>
             <div class="form-group">
-                <label for="mark">Поставьте оценку</label>
-                <select class="form-control" id="mark" name="mark" required>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option selected>5</option>
-                </select>
-              </div>
+                <label for="rate">Поставьте оценку</label>
+                <i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i>
+            </div>
+            <input type="hidden" id="mark" name="mark" value="5">
             <button type="submit" class="btn btn-primary">Отправить</button>
           </form>
         </div>
