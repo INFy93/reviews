@@ -308,3 +308,8 @@ hr {
   color: #ef7f1a;
 }
 
+.count {
+  display: inline-block;
+  padding-left: 3px;
+}
+
