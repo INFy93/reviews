@@ -64,7 +64,6 @@
                     <i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i>
                     <div class="count"><strong>(5)</strong></div>
                 </div>
-
             </div>
             <input type="hidden" id="mark" name="mark" value="5">
             <button type="submit" class="btn btn-primary">Отправить</button>

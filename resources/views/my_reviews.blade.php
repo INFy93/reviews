@@ -58,9 +58,10 @@
                     <textarea class="form-control" id="text" name="text" rows="5" minlength="10" maxlength="1000" placeholder="Введите текст отзыва" required></textarea>
                 <small class="form-text text-muted">От 10 до 1000 символов.</small>
             </div>
-            <div class="form-group">
-                <label for="rate">Поставьте оценку</label>
+            <label for="rate">Поставьте оценку:</label>
+            <div class="markers">
                 <i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i><i class="rate fas fa-star"></i>
+                <div class="count"><strong>(5)</strong></div>
             </div>
             <input type="hidden" id="mark" name="mark" value="5">
             <button type="submit" class="btn btn-primary">Отправить</button>
