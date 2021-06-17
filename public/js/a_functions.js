@@ -71,10 +71,10 @@ function deleteReview(id) {
 }
 $(document.body).on('click', '.delete_admin_log', deleteLog);
 function deleteLog() {
-    var dataTable;
-    var that = this;
+    var dtRow = 0;  //declare this globally
+    dtRow = $(this).closest('tr');
     let row_id = $(this).closest('tr').attr('id');
-    var index = $(this).closest("tr");
+    var adminLogTable = $('.datatable').DataTable();
     let route = '/dashboard/logs/delete-log/'+row_id;
     if (confirm("Удалить данную запись из лога?"))
     {
@@ -82,7 +82,7 @@ function deleteLog() {
             type: 'get',
             url: route
         }).done(function (html){
-            index.hide();
+            adminLogTable.row(dtRow).remove().draw( false );
             toastr.warning('Лог успешно удален')
         }).fail(function (html) {
             toastr.error('Ошибка удаления лога')
@@ -91,9 +91,10 @@ function deleteLog() {
 }
 $(document.body).on('click', '.delete_user_log', deleteUserLog);
 function deleteUserLog(id) {
-    var dataTable;
-    let row_id = $(id).closest('tr').attr('id');
-    var index = $(this).closest("tr");
+    var dtRow = 0;  //declare this globally
+    dtRow = $(this).closest('tr');
+    let row_id = $(this).closest('tr').attr('id');
+    var userLogTable = $('.datatable').DataTable();
     let route = '/dashboard/logs/delete-user-log/'+row_id;
     if (confirm("Удалить данную запись из лога?"))
     {
@@ -101,7 +102,7 @@ function deleteUserLog(id) {
             type: 'get',
             url: route
         }).done(function (html){
-            index.hide();
+            userLogTable.row(dtRow).remove().draw( false );
             toastr.warning('Лог успешно удален')
         }).fail(function (html) {
             toastr.error('Ошибка удаления лога')
